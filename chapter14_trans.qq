@@ -1,0 +1,227 @@
+\chapter \label chap:14:cont-segment
+    Properties of functions continuous on a segment
+
+The continuity of a function in a certain point (the function's local property)
+that we discussed last time characterizes how the function behaves
+around a point. Today we are talking about the kinds of global properties that
+continuous functions have.
+
+\section Definition and examples
+
+\definition
+    Let us look at a function $f$. Let there be some segment $[a, b]$,
+    within the domain of the function. Say the function is
+    \emph{continous on the segment} $[a, b]$, if it is continous in all points
+    of the interval $(a, b)$, and one-sided continuity is exhibited at the ends:
+    the function is continuous from the right in $a$, while being
+    continous from the left at $b$.
+
+\example
+    Let's see an example
+    \eq
+        f(x)=\begin{cases}
+            x-1, & x < 1, \\\\
+            x^2, & 1 \le x \le 2, \\\\
+            x, & x > 2.
+        \end{cases}
+    It is continous on the segment $[1, 2]$, yet is not continuous in $1$
+    and $2$.
+
+\question
+    Is this function continous on the segment $[0, 1]$?
+    \quiz
+        \choice
+            Yes
+            \comment
+                What is the function value approaching when $x\to 1^-$? What is the
+                function value in $x=1$?
+        \choice \correct
+            No
+                Correct, the condition of one-sided continuity is not respected in $1$.
+
+\example \label ex:14:1/x
+    Let us consider
+    \eq
+        f(x)=\begin{cases}
+            1/x, & x \ne 0, \\\\
+            0, & x = 0.
+        \end{cases}
+    It is continous on the interval from $(0, 1)$, but is not continous on the segment from $[0, 1]$.
+
+
+\section Partiality
+\theorem \label thm:14:bound-seg
+    Let $f$ be continous on the segment from $[a, b]$. Then it is limited
+    on the given segment.
+\remark \nonumber
+    Let us take a look at the following "proof" of this statement. As $f$
+    is continous on the segment, it has a limit in every point of the segment. If a function
+    has a limit in some point, then it is resticted in some proximity
+    of that point (e.g. \ref[a theorem][thm:12:bound] from
+    \ref[this lecture][chap:12:asymptote]). Since this holds true for all points
+    of the segment, the function is limited in the proximity of any point hence is
+    limited on the entire segment.
+
+    The proof above is incorrect. In particular, we never utilize
+    the fact that we are working on a segment, instead of, say, an interval. Yet, as
+    \ref[the example][ex:14:1/x] shows, a function may be continous on
+    an interval, all while not being limited on the given interval.
+
+\question 
+    So what is the problem, why is the "proof" not working out?
+    \quiz
+        \choice Find out \correct
+            \comment
+                 Thing is, we end up with different neighborhoods
+                 for different points, and the number $C$, which limits the
+                 modulus of the function, differs in every neighborhood. There is an
+                 infinite number of these points and their respective neighborhoods, and it may be
+                 impossible to choose one universal value of $C$ among those, which would serve
+                 all the neighborhoods simultaneously.
+\proof
+    Мы хотим доказать, что найдётся такое $C$, что для всех $x\in [a, b]$
+    выполняется неравенство $|f(x)|<C$. Докажем от противного. Пусть это не так.
+    Тогда для всякого $C$ найдётся такое $x=x(C)\in [a, b]$, что $|f(x)| > C$.
+
+    Построим последовательность $\seq{x_n}$ следующим образом. Положим $C_n=n$ и
+    пусть $x_n = x(C_n)=x(n)$. Тогда для всех $n$ выполняется неравенство
+    $|f(x_n)| > n$. 
+
+    Последовательность $\seq{x_n}$ является ограниченной, поскольку для всех $n$
+    выполняются неравенства 
+    \equation \label eq:14:ax_nb
+        a \le x_n \le b.
+    По \ref[теореме Больцано — Вейерштрасса\nonumber][thm:09:B-V], из неё можно
+    выбрать сходящуюся подпоследовательность, то есть существует такая
+    последовательность натуральных чисел $\seq{n_k}$ и такое число $x_\infty$,
+    что $x_{n_k}\to x_\infty$. По теореме о предельном переходе в неравенствах,
+    примененной к неравенствам \ref{eq:14:ax_nb}, имеем:
+    \eq
+        a \le x_\infty \le b,
+    то есть $x_\infty$ также лежит на отрезке $[a, b]$. Поскольку значения
+    $f(x_{n_k})$ не меньше $n_k$ (по построению последовательности $x_n$), и
+    $n_k$ стремится к бесконечности при $k\to \infty$, значения $f(x_{n_k})$
+    также стремятся к бесконечности при  $k\to \infty$. 
+
+    Функция $f$ определена в точке $x_\infty$ (поскольку она определена на всём
+    отрезке $[a, b]$) и непрерывна в этой точке. Значит, её предел при $x\to
+    x_\infty$ существует (может быть односторонний, если $x_\infty$ совпадает с
+    граничными точками $a$ или $b$) и равен $f(x_\infty)$. Но $x_{n_k}\to
+    x_\infty$ и по определению предела по Гейне, это означает, что
+    $f(x_{n_k})\to f(x_\infty)$. (Из-за непрерывности функции $f$ в точке
+    $x_\infty$ в определении предела по Гейне можно убрать требование о том,
+    чтобы последовательность не посещала точку $x_\infty$, см.
+    \ref[упражнение][exer:13:cont-heine] из предыдущей лекции.) Но $f(x_{n_k})
+    \to \infty$ и значит этот предел не может существовать. Противоречие!
+
+\question
+    Где в этом доказательстве мы воспользовались тем, что имеем дело именно с
+    отрезком, а не, например, с интервалом? Иными словами, где доказательство
+    «сломается», если мы попробуем с его помощью доказать, что функция $1/x$
+    ограничена на интервале $(0, 1)$ (что неверно).
+    \quiz
+        \choice Узнать ответ \correct
+            \comment
+                Ключевой шаг состоит в предельном переходе в неравенстве
+                \ref{eq:14:ax_nb}. Если взять интервал $(a, b)$ вместо отрезка,
+                $x_\infty$ может ему не принадлежать: строгие неравенства при
+                предельном переходе превращаются в нестрогие.
+
+        
+\section Теорема о корне
+\theorem \label thm:14:root
+    Пусть функция $f$ определена и непрерывна на отрезке $[a, b]$, а на концах
+    отрезка принимает значения разных знаков: это можно записать как
+    $f(a)f(b)<0$ (произведение чисел отрицательно тогда и только тогда, когда
+    эти числа имеют разные знаки). Тогда существует точка $c\in (a, b)$,
+    являющаяся корнем функции $f$, то есть такая точка, что $f(c)=0$.
+\remark \nonumber
+    Эта теорема выглядит достаточно очевидной, если посмотреть на график.
+    Пусть, например, $f(a)<0$ и $f(b)>0$. График функции начинается в точке $(a,
+    f(a))$ ниже горизонтальной оси, а заканчивается в точке $(b, f(b))$ выше её.
+    Поскольку функция непрерывна, её график выглядит как линия, которую можно
+    провести, не отрывая карандаша от бумаги (примерно так определяют
+    непрерывные функции в школе). Визуально кажется очевидным, что он обязан
+    пересечь горизонтальную прямую, иначе никак не добраться из нижней половины
+    плоскости в верхнюю. Однако, для аккуратного доказательства нам придётся
+    опираться не (только) на геометрическую интуицию, а на определения.
+\proof
+    Доказательство очень похоже на доказательство \ref[теоремы Больцано —
+    Вейерштрасса\nonumber][thm:09:B-V]. Попробуем поймать наш корень в ловушку.
+    Пусть $x_1$ — середина отрезка $[a, b]$, который мы обозначим через $I_1$.
+    Если $f(x_1)=0$, положим $c=x_1$, и всё доказано. Пусть теперь $f(x_1)\ne
+    0$. Тогда знак $f(x_1)$ не совпадает либо со знаком $f(a)$, либо со знаком
+    $f(b)$ (потому что знаки $f(a)$ и $f(b)$ разные — если совпадает с одним,
+    значит, не совпадает с другим).  Положим $I_2:=[a, x_1]$, если знаки $f(a)$
+    и $f(x_1)$ разные, и $I_2:=[x_1, b]$ в противном случае. Тогда на концах
+    отрезка $I_2$ функция гарантированно принимает значения разных знаков, и с
+    ним можно повторить ту же процедуру: разделить отрезок пополам, обозначить
+    середину за $x_2$, если $f(x_2)=0$, всё доказано, если нет, выбрать ту из
+    половинок, на концах которой функция принимает значения разных знаков,
+    обозначить её за $I_3$ и т.д.
+
+    Если этот процесс никогда не прекратится (то есть ни одна из точек $x_n$ не
+    является корнем), мы получим бесконечную последовательность вложенных
+    отрезков $I_1 \supset I_2 \supset I_3 \supset\ldots$, длины которых
+    стремятся к нулю.
+
+    Значит, по \ref[лемме о вложенных отрезках][lem:09:segments], существует
+    единственная точка $c$, принадлежащая всем отрезкам, и она является пределом
+    последовательностей концов этих отрезков. Пусть $I_k := [l_k, r_k]$, то есть
+    мы обозначили левый конец через $l_k$, а правый через $r_k$. Тогда
+    \eq
+        l_r \to c,\quad r_k \to c.
+    Кроме того, мы знаем, что для всех натуральных $k$ функция принимает разные
+    знаки на концах $I_k$, и следовательно $f(l_k)f(r_k)<0$. Сделаем предельный
+    переход в этом неравенстве при $k\to \infty$. Имеем:
+    \eq
+        \lim_{k\to \infty} f(l_k)f(r_k) \le 0.
+    С другой стороны, согласно определению предела по Гейне и исходя из
+    непрерывности функции $f$,
+    \eq
+       \lim_{k\to \infty} f(l_k) = f(c),\quad \lim_{k\to \infty} f(r_k)=f(c).
+    По теореме о пределе произведения отсюда следует, что
+    \align \nonumber
+        \item
+            \lim_{k\to \infty} f(l_k)f(r_k) & =
+            \lim_{k\to \infty} f(l_k)\cdot \lim_{k\to \infty} f(r_k)=
+        \splitem \splonly{&=} f(c)\cdot f(c) = f(c)^2.
+
+    Таким образом, $f(c)^2 \le 0$. Но квадрат любого вещественного числа
+    неотрицателен! Значит, единственная альтернатива — $f(c)=0$. Значит, $c$ —
+    искомый корень.
+
+\remark \nonumber
+    Когда мы учимся, если нам нужно решить уравнение, как правило, наши
+    преподаватели позаботились о том, чтобы уравнение действительно решалось,
+    причём именно теми методами, которые мы знаем. На практике, однако, так
+    бывает далеко не всегда: как правило уравнения не решаются явно. А решать их
+    надо. Тогда в ход идут численные методы, позволяющие находить приближенные
+    решения различных математических задач, как правило, с помощью компьютера. 
+    Приведенное доказательство замечательно тем, что не просто позволяет навести
+    строгость на и без того понятный факт, а даёт конкретный алгоритм отыскания
+    корня с любой точностью. Он называется \emph{методом бисекции отрезка}. Вы
+    можете легко запрограммировать его на любом известном вам языке
+    программирования, и решить какое-нибудь заведомо нерешаемое уравнение
+    (например, $\cos x - x=0$).
+
+\remark \nonumber
+    Теорема, которую мы доказали, говорит о том, что корень существует, но
+    ничего не говорит о его единственности. Конечно, корней может быть больше,
+    чем один.
+
+\theorem (Теорема о промежуточном значении) \label thm:14:interm
+    Пусть $f$ непрерывна на отрезке $[a, b]$. Тогда для всякого $y$, лежащего
+    между $f(a)$ и $f(b)$, найдётся такой $x \in [a, b]$, что $f(x)=y$.
+
+Эта теорема является следствием из \ref[теоремы о корне\nonumber][thm:14:root],
+доказательство оставим в качестве упражнения для семинаров.
+
+\section Заключение
+
+Мы обсудили два важных свойства функций, непрерывных на отрезке. Это первый в
+нашем курсе пример перехода от локальных свойств функции, выражающихся в
+терминах пределов, к каким-то глобальным свойствам. В дальнейшем мы ещё не раз
+столкнёмся с аналогичными задачами. Отметим также, что хорошие свойства непрерывных функций
+этими двумя не исчерпываются, и мы ещё к ним вернёмся.
+
