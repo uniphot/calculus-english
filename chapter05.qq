@@ -1,113 +1,110 @@
-\chapter Свойства пределов \label chap:05:lim-properties
-\section Пределы и ограниченность \label sec:05:lim-bound
-\subsection Сходящаяся последовательность ограничена
+\chapter Properties of limits \label chap:05:lim-properties
+\section Limits and bounds \label sec:05:lim-bound
+\subsection Converging sequence is bounded
 \theorem \label thm:05:bound
-    Пусть последовательность $\seq{a_n}$ сходится (то есть имеет предел). Тогда
-    она ограничена.
+    Let the sequence $\seq{a_n}$ be convergent (it has a limit). Then
+    it is bounded.
 \proof
-    Обозначим этот предел за $A$. Сформулируем все утверждения в кванторах.
+    Denote this limit as $A$. Let us formulate all the statements in quantifiers.
 
-    \paragraph{У нас есть} $\lim_{n \to \infty} a_n = A$, в кванторах
-    записывается так:
+    \paragraph{We have} $\lim_{n \to \infty} a_n = A$, written in quantifiers
+    as follows:
     \align 
         \item \label eq:05:lim
             \forall \eps > 0\\ \exists N=N(\eps)\\ \forall n > N\colon 
         \splitem |a_n - A| < \eps.
 
-    \paragraph{Мы хотим получить} Последовательность $\seq{a_n}$ ограничена, то
-    есть
+    \paragraph{We want to get} Sequence $\seq{a_n}$ is bounded, that is
     \equation \label eq:05:bound
         \exists C\\ \forall n\in \mathbb N\colon |a_n| \le C.
 
-    Итак, мы хотим из \ref{eq:05:lim} прийти к \ref{eq:05:bound}.
+    We want to start with \ref{eq:05:lim} and get to \ref{eq:05:bound}.
 
-    Начнём как обычно с картинки.
+    As usual, let us begin with an image.
     \figure
         \img
             \src lim-properties-1.svg
             \style
                 padding: 1em; max-width:600px;
             \alt
-                Нарисован график последовательности, на вертикальной оси
-                отмечена точка $A>0$, нарисован $\eps$-коридор вокруг точки $A$,
-                отмечена прямая $x=N$, правее этой прямой точки
-                последовательности лежат внутри коридора, левее могут лежать как
-                внутри, так и вне.
+                We have a graphed sequence, with point $A>0$
+                marked on the vertical axis, there is $\eps$-corridor around $A$,
+                the line $x=N$ is marked, points to the right of this line 
+                are inside the corridor, points to the left
+                can be both inside and outside the corridor.
         \caption
-            Ограниченность последовательности, имеющей предел.
+            Bounds of a sequence that has a limit.
         \label fig:05:bound
 
-    \paragraph{Хвост последовательности} На картинке видно, что кусок
-    последовательности, начинающийся с номера $n=N(\eps)+1$ («хвост»), явно
-    ограниченный: все элементы живут в коридоре вокруг числа $A$ и не могут от
-    него далеко уходить. Из рисунка получается, что все эти элементы ограничены
-    по модулю числом $A+\eps$ (верхняя граница коридора), но это потому, что мы
-    его так нарисовали — если бы $A$ было меньше нуля, картинка оказалась
-    симметричной (относительно горизонтальной оси) и ограничение проходило бы по
-    нижней границе коридора. Чтобы не возиться с разбором разных случаев, мы
-    будем пользоваться свойствами модулей. Однако, прежде, чем мы перейдём к
-    аккуратному построению, нужно решить важный вопрос. Дело в том, что у нас
-    сейчас нет никакого $\eps$. Нам сказано (в \ref{eq:05:lim}), что $N$
-    найдётся для любого $\eps>0$, то есть $\eps$ мы можем задавать сами. Но как?
+    \paragraph{Tail of a sequence} The figure clearly shows that a piece
+    of the sequence starting with $n=N(\eps)+1$ ("tail") is obviously
+    bounded: all the elements live in a corridor around $A$ and cannot
+    go far from it. Using the visuals, we deduce that all the elements are absolute-value
+    bounded by the number $A+\eps$ (upper bound of the corridor), but that is because
+    we drew it like that — if $A$ were less than zero, the image would be
+    symmetrical (about the horizontal axis), and the bound would pass through
+    the lower boundary. To avoid the trouble of dealing with special cases,
+    we will uses properties of moduli. Yet, before we move on to
+    exact graphing, we must solve an important issue. Thing is, we do not
+    currently have any $\eps$. We are told (in \ref{eq:05:lim}) that $N$
+    can be found for any $\eps>0$, hence we can set $\eps$ ourselves. But how?        
 
-    На самом деле, здесь можно выбрать любое значение $\eps>0$. Например,
-    положим $\eps=1$. Пусть $N=N(1)$ — теперь это какое-то зафиксированное
-    число.  Тогда для всех $n>N$,
+    Truth be told, we can choose any value of $\eps>0$. For example,
+    assume $\eps=1$. Let $N=N(1)$—now it is some fixed number.
+    Then for all $n>N$,
     \eq
         |a_n-A|<1.
-    Итак, мы имеем оценку для $|a_n-A|$ для хвоста последовательности. А хотим,
-    как следует из \ref{eq:05:bound}, оценку для $|a_n|$. Как её получить?
-    Воспользуемся неравенством треугольника!
+    So we have an estimate for $|a_n-A|$ for the sequence tail. Now,
+    we want an estimate for $|a_n|$, as it follows from \ref{eq:05:bound}. Where do we get it?
+    Let us use the triangle inequality!
 
-    Величина $|a_n|$ — это расстояние от $a_n$ до нуля. Это расстояние не
-    больше, чем сумма расстояний от $a_n$ до $A$ и от $A$ до $0$:
+    The value of $|a_n|$ is the distance from $a_n$ to zero. This distance is not
+    larger than the sum of distances from $a_n$ to $A$ and from $A$ to $0$:
     \align \nonumber
         \item 
             |a_n|  = |a_n - 0| & \le |a_n - A| + |A-0| = 
         \splitem \splonly{&=} |a_n - A| + |A|.
-    Но мы знаем, что для $n>N$, $|a_n - A| < 1$. Следовательно, для тех же $n$,
+    But we know that for $n>N$, $|a_n - A| < 1$. Hence for the same $n$,
     \equation \label eq:05:A+1
         |a_n| < |A|+1.
-    Итак, для хвоста последовательности мы получили искомую оценку. Однако,
-    это ещё не конец доказательства. Вдруг хвост ограниченный, а «голова»
-    (элементы до $N$ включительно) нет?
+    We found the estimate for the sequence tail. However,
+    the proof is not finalized. Maybe the tail is bounded, but the "head"
+    (elements up to and including $N$) is not?
 
-    \paragraph{Начало последовательности} На самом деле, этого не может быть.
-    Дело в том, что элементов от $a_1$ до $a_N$ всего конечное число (их ровно
-    $N$ штук). А любое конечное множество обязательно ограниченно, потому что в
-    нём есть максимальный элемент — такой элемент, который не меньше всех
-    остальных. (Аккуратное доказательство этого утверждения — хорошее
-    упражнение. Подсказка: можно сделать индукцию по числу элементов и
-    воспользоваться тем фактом, что среди двух чисел всегда одно не меньше
-    другого.)
+    \paragraph{Start of a sequence} Actually, it cannot happen.
+    There is a finite number of elements from $a_1$ to $a_N$ (exactly
+    $N$). Any finite set is necessarily bounded, because there is
+    a max element—such element that is larger than
+    any other. (Rigorous proof of this statement is a great
+    exercise. Tip: we could use induction on the number of elements
+    and use the fact that when we are given two numbers, one of them
+    is always larger than the other.)
 
-    \paragraph{Сведём всё воедино} Итак, хвост последовательности можно
-    ограничить числом $|A|+1$, а начало — максимальным из модулей чисел $a_1$,
-    $a_2$, …, $a_N$. Положим:
+    \paragraph{Bring everything together} And so the tail of a sequence
+    can be bounded by the number $|A|+1$, the beginning—by the maximum absolute value from $a_1$,
+    $a_2$, …, $a_N$. Consider:
     \eq
         C:=\max\set{|a_1|, |a_2|, \ldots, |a_N|, |A|+1}
-    По построению, $C$ искомое. Действительно, для всех натуральных $n$, либо $n
-    \le N$, и тогда $|a_n| \le C$ по определению максимума, либо $n > N$, и
-    тогда $|a_n| < |A|+1 \le C$ по \ref{eq:05:A+1}.
+    We are looking for $C$. Indeed, for all natural $n$, or $n
+    \le N$, and then $|a_n| \le C$ by definition of a maximum, or $n > N$, and
+    then $|a_n| < |A|+1 \le C$ by \ref{eq:05:A+1}.
 
-\subsection Бесконечные пределы \label ssec:05:inf-limits
+\subsection Infinite limits \label ssec:05:inf-limits
 
-Итак, мы выяснили, что все сходящиеся последовательности ограничены. Однако,
-оказывается полезным выделить среди неограниченных последовательностей такие,
-чьё поведение похоже на поведение последовательностей, которые куда-то стремятся
-— только не к какому-то числу, а «к бесконечности». Аккуратный смысл этого
-выражения даётся следующими определениями.
+We found out that all convergent sequences are bounded. Yet,
+turns out it is helpful to select sequences that tend to infinity from the pool 
+of non-bounded sequences. Or, to put it rigorously.
 
 \definition \label def:05:inf-limits
-    Последовательность $\seq{a_n}$ \emph{стремится к бесконечности}, если для
-    всякого числа $C\in \mathbb R$ найдётся такое натуральное $N=N(C)$, что для
-    всех $n>N$ выполняется неравенство $|a_n| > C$. В кванторах:
+    Sequence $\seq{a_n}$ \emph{tends to infinity} if for
+    any number $C\in \mathbb R$ there is such a number $N=N(C)$ that for all
+    $n>N$ $|a_n| > C$ holds. In quantifiers:
     \eq
         \forall C \in \mathbb R\\ \exists N=N(C)\\ \forall n>N\colon |a_n| > C.
-    Пишут:
+    Writing:
     \eq
         \lim_{n\to \infty} a_n = \infty
-    или
+    or
     \eq
         a_n \to \infty\text{ при } n \to \infty.
 
@@ -117,112 +114,105 @@
             \style
                 padding: 1em; max-width:600px;
             \alt
-                Нарисован график последовательности, на вертикальной оси
-                отмечены точки $C$ и $-C$, нарисован $C$-коридор вокруг нуля,
-                отмечена прямая $x=N$, правее этой прямой точки
-                последовательности лежат вне коридора, левее могут лежать как
-                внутри, так и вне.
+                We have a graph of the sequence, points $C$ and $-C$
+                are marked on the vertical axis, the $C$-corridor is marked around zero
+                as well as the line $x=N$. Points to the right of this line
+                are outside the corridor, points to the left can be
+                both inside and outside of it.
         \caption
-            Последовательность стремится к бесконечности.
+            Sequence tends to infinity.
         \label fig:05:inf
 \definition \label def:05:inf-limits-plus
-    Последовательность $\seq{a_n}$ \emph{стремится к плюс бесконечности}, если для
-    всякого числа $C\in \mathbb R$ найдётся такое натуральное $N=N(C)$, что для
-    всех $n>N$ выполняется неравенство $a_n > C$. В кванторах:
+    Sequence $\seq{a_n}$ \emph{tends to positive infinity}, if for any
+    $C\in \mathbb R$ there is such $N=N(C)$ that for
+    all $n>N$ $a_n > C$ is true. In quantifiers:
     \eq
         \forall C \in \mathbb R\\ \exists N=N(C)\\ \forall n>N\colon a_n > C.
-    Пишут:
+    We denote it as:
     \eq
         \lim_{n\to \infty} a_n = +\infty
-    или
+    or
     \eq
-        a_n \to +\infty\text{ при } n \to \infty.
+        a_n \to +\infty\text{ provided } n \to \infty.
 
 \definition \label def:05:inf-limits-minus
-    Последовательность $\seq{a_n}$ \emph{стремится к минус бесконечности}, если для
-    всякого числа $C\in \mathbb R$ найдётся такое натуральное $N=N(C)$, что для
-    всех $n>N$ выполняется неравенство $a_n < C$. В кванторах:
+    Sequence $\seq{a_n}$ \emph{tends to negative infinity} if for any
+    $C\in \mathbb R$ there is such $N=N(C)$ that for
+    all $n>N$ $a_n < C$ is true. In quantifiers:
     \eq
         \forall C \in \mathbb R\\ \exists N=N(C)\\ \forall n>N\colon a_n < C.
-    Пишут:
+    We denote it as:
     \eq
         \lim_{n\to \infty} a_n = -\infty
-    или
+    or
     \eq
         a_n \to -\infty\text{ при } n \to \infty.
 
 \exercise
-    Докажите следующие утверждения, используя приведенные выше определения.
+    Prove the following statements using the definitions above.
     \enumerate
         \item
-            Последовательность $\seq{a_n}$, $a_n=n$, стремится к бесконечности, а также
-            к плюс бесконечности.
+            Sequence $\seq{a_n}$, $a_n=n$ tends to infinity and
+            positive infinity.
         \item
-            Последовательность $\seq{(-1)^n n}$ стремится к бесконечности, но ни к
-            плюс бесконечности, ни к минус бесконечности не стремится.
+            Sequence $\seq{(-1)^n n}$ tends to infinity, but it does not
+            tend to neither positive or negative infinity.
         \item
-            Последовательность $\seq{n+(-1)^n n}$ не стремится ни к какой
-            бесконечности, хоть и является неограниченной.
-\remark
-    В некоторых источниках — например, в учебнике Стюарта — используются немного
-    другие обозначения: то, что мы называем просто бесконечностью, без знака,
-    там обозначается через $\pm \infty$, а то, что мы называем плюс бесконечностью,
-    там обозначается просто как $\infty$. Мы будем придерживаться более привычными
-    для русскоязычного читателя обозначениями.
+            Sequence $\seq{n+(-1)^n n}$ does not tend to any infinity,
+            despite being unbounded.
 
 \remark \label rem:05:inf-not-exist
-    Нужно понимать, что в формуле
+    We must understand that in
     \eq
         \lim_{n\to \infty} a_n = \infty, 
-    знак $\infty$ не является вещественным числом, то есть эту формулу не
-    следует воспринимать как арифметическое равенство. Это условное обозначение
-    для утверждения, точный смысл которого сформулирован в
-    \ref[опредении][def:05:inf-limits] выше. Несмотря на то, что мы пишем, что
-    предел чему-то равен, мы по-прежнему будем считать, что он не
-    существует (поскольку последовательность $\seq{a_n}$ не
-    удовлетворяет \ref[определению предела\nonumber][def:04:lim]). Про последовательность
-    $\seq{a_n}$ мы будем говорить, что она расходится — но расходится не абы
-    как, а «к бесконечности». 
+    the sign $\infty$ is not a real number, this formula
+    should not be treated as an arithmetic equality. It is a symbol
+    for the statement whose exact meaning is formulated in
+    \ref[the definition][def:05:inf-limits] above. Despite the fact that
+    we say that a limit equals something, we will still consider that it does not
+    exist (as the sequence $\seq{a_n}$ does not satisfy
+    \ref[the definition of a limit\nonumber][def:04:lim]). We will say that the
+    sequence $\seq{a_n}$ diverges, but diverges not randomly––it
+    diverges "to infinity". 
 
-\section Арифметика пределов
+\section Arithmetics of limits
 
-Пусть есть две последовательности, $\seq{a_n}$ и $\seq{b_n}$. Над ними можно
-проводить арифметические операции: складывать, вычитать, умножать, делить.
-Операции над последовательностями проводятся поэлементно. Например, пусть
-последовательность $\seq{c_n}$ является суммой последовательностей $\seq{a_n}$ и
-$\seq{b_n}$. Можно записать:
+Let us have two sequences: $\seq{a_n}$ and $\seq{b_n}$. We can do
+basic arithmetic with those: add, subtract, multiply, divide.
+These operations on sequence must be applied element-by-element. For example, let
+the sequence $\seq{c_n}$ be the sum of $\seq{a_n}$ and
+$\seq{b_n}$. We can write:
 \eq
     \seq{c_n}=\seq{a_n}+\seq{b_n},
-что будет означать
+which will mean
 \eq
     \forall n \in \mathbb N \colon c_n = a_n + b_n.
 
-Серия утверждений, которые мы докажем в этом разделе, говорит о том,
-как операция перехода к пределу взаимодействует с арифметическими операциями.
+The series of statements, which we will prove in this section, describes how
+the operation of transition to limits interacts with basic arithmetic.
 
-\subsection Предел суммы
+\subsection Limit of a sum
 
 \theorem  \label thm:05:sum
-    Пусть даны две последовательности, $\seq{a_n}$ и $\seq{b_n}$ и
-    существуют пределы
+    Let us have two sequences: $\seq{a_n}$ and $\seq{b_n}$, so there exist limits
     \align
         \item 
             \lim_{n \to \infty} a_n &= A,
         \item 
             \lim_{n \to \infty} b_n &= B.
-    Тогда предел последовательности $\seq{a_n+b_n}$ тоже существует и равен
+    Then the limit of $\seq{a_n+b_n}$ also exists and equals
     $A+B$:
     \eq
         \lim_{n \to \infty} (a_n + b_n) = A+B.
-    Попросту говоря, «предел суммы равен сумме пределов».
+    Simply speaking, "the limit of a sum equals the sum of limits".
 
-    Заметим, что $A$ и $B$ здесь — обязательно обычные вещественные числа,
-    поскольку требуется, чтобы пределы существовали (см.
-    \ref[замечание][rem:05:inf-not-exist]).
+    Note that $A$ and $B$ here are always real numbers,
+    as we require that limits exist (see
+    \ref[remark][rem:05:inf-not-exist]).
 \proof
-    Перепишем формально, что нам дано, и что требуется доказать.
+    Let us formally rewrite what we are given and what we need to prove.
 
-    \paragraph{Нам дано}
+    \paragraph{We are given}
     \align
         \item \label eq:05:sum1
             \forall \eps_1>0  \\ & \exists N_1=N_1(\eps_1)\\ 
@@ -234,7 +224,7 @@ $\seq{b_n}$. Можно записать:
         \splitem 
             \splonly{&} \forall n > N_2 \colon |b_n - B| < \eps_2.
 
-    \paragraph{Мы хотим доказать}
+    \paragraph{We want to prove}
     \align 
         \item \label eq:05:sum-need
             \forall \eps>0 \\ & \exists N=N(\eps)\\ 
@@ -243,105 +233,103 @@ $\seq{b_n}$. Можно записать:
         \splitem
             \splonly{&} |(a_n + b_n) - (A+B)| < \eps.
 
-    Утверждения \ref{eq:05:sum1} и \ref{eq:05:sum2} можно понимать так: мы можем
-    добиться того, чтобы $a_n$ был близок к $A$, а $b_n$ был близок к $B$,
-    накладывая подходящие условия на $n$. Утверждение \ref{eq:05:sum-need},
-    которое мы хотим доказать, звучит так: мы хотим научиться накладывать такие
-    условия на $n$, чтобы сделать $(a_n+b_n)$ близким к $(A+B)$.  Выглядит
-    логично: если $a_n$ близко к $A$, а $b_n$ близко к $B$, то логично ожидать,
-    что $(a_n + b_n)$ окажется близко к $(A+B)$. Осталось доказать!
+    Statements \ref{eq:05:sum1} and \ref{eq:05:sum2} can be understood as: we can
+    achieve $a_n$ such that it is close to $A$, and $b_n$ is close to $B$,
+    by imposing certain condition on $n$. The statement \ref{eq:05:sum-need}
+    that we want to prove goes like this: we want to learn to impose such
+    conditions on $n$ that $(a_n+b_n)$ becomes close to $(A+B)$.  Seems
+    reasonable: if $a_n$ is close to $A$, аnd $b_n$ is close to $B$, it is reasonable
+    to expect that $(a_n + b_n)$ turns out close to $(A+B)$. Let us get proving!
 
-    Начнём с преобразования левой части неравенства в конце \ref{eq:05:sum-need}:
+    Start by transforming the left-hand side of the inequality towards the end of \ref{eq:05:sum-need}:
     \align \nonumber
         \item \splonly{&}|(a_n + b_n) - (A+B)| = 
         \splitem  \splonly{=&} |(a_n - A)  + (b_n - B)|.
-    Это тождественное преобразование (раскрыли скобки и перегруппировали
-    слагаемые), но оно позволяет выделить в формуле те разности, которые мы
-    умеем оценивать: $(a_n - A)$ и $(b_n - B)$. Вернее, мы умеем оценивать их
-    модули, поэтому нам понадобится одно из свойств модулей: модуль суммы не
-    превосходит суммы модулей:
+    This is an identity transformation (we opened the parentheses and regrouped
+    the terms), yet it allows to select those differences that we can evaluate:
+    $(a_n - A)$ and $(b_n - B)$. To be more precise, we can evaluate
+    their moduli, and that is why we will use one of the properties of moduli: the modulus
+    of the sum is not larger than the sum of moduli.
     \align 
         \item \label eq:05:sumestimate
             \splonly{&} |(a_n - A) + (b_n - B)| \le 
         \splitem \splonly{\le &} |a_n - A| + |b_n - B|.
-    Теперь заметим, что первое слагаемое мы можем сделать меньшим, чем $\eps_1$,
-    а второе — меньшим, чем $\eps_2$. Но как выбрать $\eps_1$ и $\eps_2$? Мы
-    хотим в конечном итоге прийти к неравенству, в правой части которого будет
-    $\eps$. Значит, можно выбрать $\eps_1$ и $\eps_2$ так, чтобы их сумма
-    равнялась $\eps$. Положим:
+    Now note that we can make the first term smaller than $\eps_1$,
+    and the second smaller than $\eps_2$. But how do we choose $\eps_1$ and $\eps_2$? We
+    want to get an inequality that will have $\eps$ on the
+    right-hand side. Hence, we can choose $\eps_1$ and $\eps_2$ in such a way
+    that their sum equals $\eps$. Consider:
     \eq
         \eps_1 = \frac{\eps}{2},\quad \eps_2=\frac{\eps}{2}.
-    Теперь мы можем подставить эти $\eps_1$ и $\eps_2$ в утверждения
-    \ref{eq:05:sum1} и \ref{eq:05:sum2}. Каждое из них выдаст нам в ответ своё
-    $N$ (вернее, $N_1$ и $N_2$) — номера членов, после которых выполняется
-    соответствующая оценка для $|a_n-A|$ и $|b_n-B|$. Мы хотим, чтобы они
-    выполнялись обе. Как обычно, это означает, что из получившихся значений
-    нужно выбрать максимальное.
+    Now we can use $\eps_1$ and $\eps_2$ in both statements
+    \ref{eq:05:sum1} and \ref{eq:05:sum2}. Every one of those will give us a different
+    $N$ (more precisely, $N_1$ и $N_2$) — the terms after which a respective evaluation
+    for $|a_n-A|$ and $|b_n-B|$ is performed. We want them both
+    fulfilled. Usually it means that we need to choose the max value
+    from those available.
 
-    Итак, мы готовы сформулировать железобетонное доказательство. Для любого
-    $\eps>0$ положим $\eps_1=\eps/2$ и $\eps_2=\eps/2$. Из \ref{eq:05:sum1} и
+    Now we are ready to formulate a airtight proof. For any
+    $\eps>0$ assume $\eps_1=\eps/2$ and $\eps_2=\eps/2$. From \ref{eq:05:sum1} and
     \ref{eq:05:sum2}
-    получим такие $N_1=N_1(\eps_1)=N_1(\eps/2)$ и $N_2=N_2(\eps_2)=N_2(\eps/2)$,
-    что для всех $n>N_1$
+    get such $N_1=N_1(\eps_1)=N_1(\eps/2)$ and $N_2=N_2(\eps_2)=N_2(\eps/2)$,
+    that for all $n>N_1$
     \equation \label eq:05:a-sum-est
         |a_n - A| < \eps_1=\frac{\eps}{2},
-    и для всех $n>N_2$
+    and for all $n>N_2$
     \equation \label eq:05:b-sum-est
 
         |b_n - B| < \eps_2 = \frac{\eps}{2}.
-    Положим теперь:
+    Consider now:
     \eq
         N(\eps):=\max\left(N_1\left(\frac{\eps}{2}\right),
         N_2\left(\frac{\eps}{2}\right)\right).
-    Тогда для всех $n>N(\eps)$, будет выполнятья $n>N_1$ и $n>N_2$, и значит
-    будут выполняться обе оценки \ref{eq:05:a-sum-est} и \ref{eq:05:b-sum-est}.
+    Then for all $n>N(\eps)$ both $n>N_1$ and $n>N_2$ will be fulfilled, and so
+    both \ref{eq:05:a-sum-est} and \ref{eq:05:b-sum-est} will be met.
 
-    Значит, согласно \ref{eq:05:sumestimate}, для всех таких $n$, будет также
-    выполняться оценка
+    So according to \ref{eq:05:sumestimate}, for all such $n$, the following
+    estimate will be fulfilled
     \align \nonumber
         \item \splonly{&}|(a_n + b_n) - (A+B)| \le 
         \splitem \splonly{\le &} |A_n - A| + |B_n - B| < 
         \splitem \splonly{< &} \frac{\eps}{2} + \frac{\eps}{2}=\eps.
-    Таким образом, \ref{eq:05:sum-need} доказано: мы научились по каждому
-    положительному $\eps$ строить такое $N$, что для всех $n>N$ выполнено неравенство
-    $|(a_n + b_n) - (A+B)| < \eps$.
+    Now \ref{eq:05:sum-need} is proven: we learned to generate such $N$
+    using every positive $\eps$ that for all $n>N$ the inequality
+    $|(a_n + b_n) - (A+B)| < \eps$ holds.
 
-    Ура!
+    Woohoo!
 
 \remark
-    Это типичный пример доказательства теоремы, в которой нам даны какие-то
-    утверждения о пределах и нужно доказать какие-то другие утверждения про
-    пределы. Важно проследить, как это доказательство устроено, какие числа мы
-    воспринимаем как данные, а какие строим сами.
+    This is a typical example of a theorem proof when we are given some
+    statements about limits, and we need to prove some other statements about
+    limits. It is important to follow the logic of the proof: which numbers we treat
+    as given, and which ones we "construct" ourselves.
 
-    Утверждение \ref{eq:05:sum-need} мы хотим доказать. В нём сказано, что для
-    всякого $\eps>0$ должно найтись такое $N$, что (и дальше сказано, что $N$
-    «хорошее», обладает нужным нам свойством). Это означает, что для
-    доказательства этого утверждения нам нужно научиться по каждому $\eps$
-    научиться строить $N$ (как правило, в таких задачах доказать, что $N$
-    существует, проще всего, предъявив явный алгоритм, как его строить) и
-    доказывать, что оно «хорошее».
+    We want to prove \ref{eq:05:sum-need}. It says that for any
+    $\eps>0$ there must be such an $N$ that (and it says that $N$
+    is "good",so it has the property that we need). It means that to
+    prove this statement, we need to learn to use every $\eps$
+    to generate $N$ (as a rule for this type of problems, it is easiest to prove that $N$
+    exists by presenting a clear algorithm for generating it) and
+    prove that it is "good".
 
-    Далее, утверждение, например, \ref{eq:05:sum1} нам дано. В нём сказано, что
-    для всякого $\eps_1>0$ найдётся такое $N_1$, что (и дальше сказано, что
-    $N_1$ «хорошее»). Это означает, что мы можем по своему выбору выбирать
-    $\eps_1$, и это утверждение в ответ выдаст нам $N_1$, которое гарантированно
-    удовлетворяет указанному далее свойству. В дальнейшем мы можем использовать
-    это $N_1$ в нашем доказательстве — в данном случае мы его использовали
-    (вместе с $N_2$, полученным из \ref{eq:05:sum2}), чтобы построить наше $N$,
-    существование которого нужно было доказать. В доказательстве того, что $N$
-    действительно то, которое нам нужно, мы использовали соответствующие
-    «хорошие» свойства $N_1$ и $N_2$, гарантированные нам утверждениями
-    \ref{eq:05:sum1} и \ref{eq:05:sum2}. Чтобы связать всю конструкцию воедино,
-    нам нужно было выбрать $\eps_1$ и $\eps_2$ в зависимости от нашего $\eps$.
-    Мы их выбрали ровно такими, чтобы получившаяся оценка была такой, какая нам
-    нужна.
+    Furthermore, we are given \ref{eq:05:sum1}. It says that for any
+    $\eps_1>0$ there is such $N_1$ that (and it says that
+    $N_1$ is "good"). It means that choosing $\eps_1$ is at our discretion,
+    and the statement will give us $N_1$, which is guaranteed
+    to satisfy the property indicated later. From here onwards we will use
+    this $N_1$ in our proof — in this case we used it
+    (together with $N_2$ that we got from \ref{eq:05:sum2}), to generate our $N$,
+    whose existence we had to prove. While proving that the $N$
+    is the one we need, we used the respective "good" properties
+    of $N_1$ и $N_2$, which are guaranteed by
+    \ref{eq:05:sum1} and \ref{eq:05:sum2}. To tie this all together,
+    we had to choose $\eps_1$ and $\eps_2$ depending on $\eps$.
+    We chose them exactly such that the given estimate is the one we need.
 
-    Всё вместе это выглядит как построение своего рода механизма, который
-    принимает какой-то материал на вход и на выход выдаёт в точности то, что
-    требуется, используя по ходу своей работы промежуточные механизмы, которые
-    нам также даны, см. \ref[рис.][fig:05:eps-to-N] и
-    \ref{fig:05:eps-to-N-proof}.
+    All of this together looks like building a machine that
+    has some input, and produces exactly what we need as output while
+    using some intermediate mechanisms, which are also given to us,
+    see \ref[fig.][fig:05:eps-to-N] and \ref{fig:05:eps-to-N-proof}.
 
     \figure
         \img
@@ -349,15 +337,15 @@ $\seq{b_n}$. Можно записать:
             \style
                 padding: 1em; max-width:700px;
             \alt
-                Схема доказательства теоремы о пределе суммы: построение N по
-                ε. Сначала ε делится на две половинки, каждая из половинок подаётся
-                на вход своему «механизму». Механизмы возвращают N_1 и
-                N_2, из них берётся максимум и так получается N. Первый механизм
-                гарантирует, что для всех n>N_1 выполняется неравенство
-                |a_n-A|<ε/2. Второй механизм гарантирует, что для всех n>N_2
-                выполняется неравенство |b_n-B|<ε/2.
+                Chart showing the proof of the limit of a sum theorem: generating N using
+                ε. First, ε is divided into two halves, each one of those
+                is fed into its own "mechanism". The mechanisms return N_1 and
+                N_2, we take a maximum from those and get N. The first mechanism
+                guarantees that for all n>N_1 the inequality
+                |a_n-A|<ε/2 holds. The second mechanism guarantees that for all n>N_2
+                |b_n-B|<ε/2 holds.
         \caption
-            Схема доказательства теоремы о пределе суммы: построение $N$ по
+            Chart showing the proof of the limit of a sum theorem: generating N using
             $\eps$.
         \label fig:05:eps-to-N
     \figure
@@ -366,103 +354,101 @@ $\seq{b_n}$. Можно записать:
             \style
                 padding: 1em; max-width:600px;
             \alt
-                Доказательство того, что построенное $N$ удовлетворяет условию,
-                повторяет описание, приведенное в тексте.
+                Proof of the fact that $N$ satisfies the condition
+                repeats the description given in the text.
         \caption
-            Схема доказательства теоремы о пределе суммы: доказательство, что
-            построенное $N$ удовлетворяет условию в определении предела.
+            Chart showing the proof of the limit of a sum theorem: proof that
+            generated $N$ satisfies the condition in the definition of a limit.
         \label fig:05:eps-to-N-proof
 
-    Построением таких механизмов мы будем заниматься на протяжении всего курса.
+    We will be building such mechanisms for the entirety of the course.
 
-\subsection Упрощающая лемма
-Давайте посмотрим ещё раз на доказательство \ref[теоремы][thm:05:sum]. Нам
-пришлось довольно хитрым образом выбирать $\eps_1$ и $\eps_2$ по $\eps$, чтобы в
-итоге получилось нужное неравенство. Этот момент выглядит немножко
-неестественным. Что было бы, если бы мы просто положили $\eps_1=\eps$ и
-$\eps_2=\eps$? Тогда в конечном итоге было бы доказано такое утверждение:
+\subsection The Simplifying Lemma
+Let us take one more look at the proof of the \ref[theorem][thm:05:sum]. We had
+be sneaky about choosing $\eps_1$ and $\eps_2$ as per $\eps$ to get
+the correct inequality at the end. This aspect seems a bit
+unnatural. What if we just assumed that $\eps_1=\eps$ and
+$\eps_2=\eps$? Then we would prove the following statement:
 
 \eq
     \forall \eps>0\\ \exists N=N(\eps)\\ \forall n>N\colon |a_n - A| < 2\eps.
-Это утверждение не является определением предела. Тем не менее, понятно, что
-оно эквивалентно определению предела: выбирать произвольное положительное
-значение $\eps$ и выбирать произвольное положительное значение $2\eps$ — это
-одно и то же!
+This statement is not the definition of a limit. Nonetheless, it is clear that
+the statement is equivalent to the definition of a limit: choose a random positive
+value of $\eps$ and choose a random positive value of $2\eps$ is the
+same thing!
 
-Следующая лемма, которой мы будем в дальнейшем пользоваться, формализует это
-соображение.
+The next lemma, which we will use in the future, formalizes this idea.
 
 \lemma \label lem:05:simplify
-    Пусть нашлась такая константа $C$, что для всякого $\eps_1>0$ найдётся такое
-    $N_1=N_1(\eps_1)$ что для всякого $n>N_1$ выполняется неравенство $|a_n - A|
-    < C\eps_1$. Тогда $\lim_{n\to \infty}{a_n}=A$.
+    Let there be such $C$ that for any $\eps_1>0$ there is such
+    $N_1=N_1(\eps_1)$ that for any $n>N_1$ $|a_n - A| holds true
+    < C\eps_1$. Then $\lim_{n\to \infty}{a_n}=A$.
 
-    Формально: пусть
+    Formally: let
     \align \nonumber
         \item \exists C\\ \forall \eps_1 > 0\\ \exists N_1=N_1(\eps_1)\\ 
         \splitem \forall n > N_1\colon |a_n - A| < C\eps_1.
-    тогда
+    then
     \equation \label eq:05:lim-an
         \lim_{n\to \infty} a_n = A.
-Иными словами, если при доказательстве утверждения \ref{eq:05:lim-an} получилось
-доказать «испорченное» определение предела, где в правой части последнего
-неравенства вместо $\eps$ стоит $10\eps$ или $15\eps$ или какое-нибудь
-$(M+1)^2\eps$ — ничего страшного, это всё равно победа. Главное, чтобы
-константа, стоящая перед $\eps$, не зависела от $n$.
+In other words, if while proving \ref{eq:05:lim-an} we managed to prove
+the "erroneous" definition of a limit, where we have $10\eps$ or $15\eps$ or some
+$(M+1)^2\eps$ instead of $\eps$–it on the right-hand side of the
+inequality. This is no big deal, it is a win-win anyway.
+We only really care, and thus require, that the constant before $\eps$ not depend on $n$.
 
 \proof
-    Во-первых, заметим, что $C$ обязательно больше нуля. Действительно, модуль
-    всегда неотрицателен, поэтому неравенство $|a_n - A| < C\eps_1$ может
-    выполняться лишь при условии, что в правой части стоит положительное число,
-    а $\eps_1>0$, значит $C>0$.
+    First of all, note that $C$ is necessarily bigger than zero. Indeed, the modulus
+    is always non-negative, hence the inequality $|a_n - A| < C\eps_1$ can hold
+    only if there is a positive number on the right-hand side,
+    and $\eps_1>0$ so $C>0$.
 
-    Перепишем условие \ref{eq:05:lim-an} формально. Оно выглядит так:
+    Let us formally put down the condition for \ref{eq:05:lim-an}. It goes like this:
     \eq
         \forall \eps>0\\ \exists N=N(\eps)\\ \forall n>N\colon |a_n - A| < \eps.
 
-    Чтобы по $\eps$ найти $N$, возьмём $\eps_1=\frac{\eps}{C}$ (имеем право так
-    написать, потому что $C>0$, и значит деление допустимо и не поменяет знак) и
-    положим $N=N_1(\eps_1)=N_1(\eps/C)$. Тогда для всех $n>N$ выполняется
-    неравенство:
+    To find $N$ using $\eps$, let us take $\eps_1=\frac{\eps}{C}$ (we can denote it
+    as $C>0$, hence the division is allowed and will not change the sign) and
+    consider $N=N_1(\eps_1)=N_1(\eps/C)$. Then we got an inequality which holds for all $n>N$:
     \eq
         |a_n-A|<C\eps_1=C\frac{\eps}{C}=\eps.
-    Что и требовалось получить. Лемма доказана.
+    Exactly what we needed. The lemma is proven.
 \remark \nonumber
-    В формулировке леммы $C$ может быть меньше $1$, хотя в этом случае она
-    становится тривиальной: если у нас есть утверждение, начинающееся как
-    определение предела, а заканчивающееся, например, неравенством $|a_n - A| <
-    \eps/2$, то это уже победа: мы просто продолжим цепочку неравенств $|a_n -
-    A | < \eps/2 < \eps$ и получим то, что требовалось в «честном» определении
-    предела. Можно было бы в доказательстве леммы рассмотреть два случая, $C<1$ и
-    $C>1$, и для $C<1$ написать более простое рассуждение (просто «ничего не
-    делать», то есть положить $\eps_1=\eps$, $N=N_1(\eps)$), но приведённое выше 
-    доказательство работает в обоих случаях, так что в этом нет необходимости.
+    In lemma's formulation, $C$ can be smaller than $1$, although in this case
+    it becomes trivial: if we have a statement that starts as a definition of a limit,
+    but ends, as, say, an inequality $|a_n - A| <\eps/2$,
+    it is already a win: we just continue the sequence of inequalities $|a_n -
+    A | < \eps/2 < \eps$ and will get what we needed in the "honest" definition
+    of a limit. We could look at two cases in the proof of the lemma: $C<1$ and
+    $C>1$, and for $C<1$ write a simpler rationale (just "do nothing",
+    consider $\eps_1=\eps$, $N=N_1(\eps)$), but the proof above 
+    works in both cases, so it is not necessary.
 
-Теперь при доказательстве теорем, аналогичных \ref[теореме][thm:05:sum], мы не
-будем подбирать хитрым образом вспомогательные $\eps$, а вместо этого просто
-будем считать $\eps_1=\eps_2=\eps$ и дальше воспользуемся только что доказанной
-леммой. Начнём с теоремы о пределе произведения.
+Now when proving theorems analogous to \ref[this one][thm:05:sum], we will not
+choose some auxilary $\eps$, but rather
+consider $\eps_1=\eps_2=\eps$ and will just use the lemma that
+we have just proven. Let us start with the limit of a sum lemma.
 
-\subsection Предел произведения
+\subsection Limit of a product
 \theorem \label thm:05:prod
-    Пусть даны две последовательности, $\seq{a_n}$ и $\seq{b_n}$ и
-    существуют пределы
+    We are given two sequences: $\seq{a_n}$ and $\seq{b_n}$ and
+    there are limits
     \align
         \item \label eq:05:prod1-lim
             \lim_{n \to \infty} a_n &= A,
         \item \label eq:05:prod2-lim
             \lim_{n \to \infty} b_n &= B.
-    Тогда предел последовательности $\seq{a_n  b_n}$ тоже существует и равен
+    Then the limit of $\seq{a_n  b_n}$ also exists and equals
     $AB$:
     \eq \label eq:05:prod1-need
         \lim_{n \to \infty} a_n b_n = AB.
-    Попросту говоря, «предел произведения равен произведению пределов».
+    Simply speaking, "the limit of a sequence equals the product of limits".
 
 \proof
-    Как обычно, запишем, что нам известно, и что нужно доказать.
+    As usual, let us write down what is given and what needs proving.
 
-    \paragraph{Нам дано} Равенства \ref{eq:05:prod1-lim} и \ref{eq:05:prod2-lim}
-    записываются в виде:
+    \paragraph{We are given} Equalities \ref{eq:05:prod1-lim} and \ref{eq:05:prod2-lim}
+    are written as:
     \align
         \item \label eq:05:prod1
             \forall \eps_1\splonly{&}>0 \\  \exists N_1=N_1(\eps_1)\\ 
@@ -474,22 +460,22 @@ $(M+1)^2\eps$ — ничего страшного, это всё равно по
         \splitem 
             \splonly{&} \forall n > N_2 \colon |b_n - B| \longonly{&} < \eps_2.
 
-    \paragraph{Мы хотим доказать} Равенство \ref{eq:05:prod-need}:
+    \paragraph{We want to prove} Equality \ref{eq:05:prod-need}:
     \gather
         \item \label eq:05:prod-need
             \forall \eps>0 \\ \exists N=N(\eps)\\ \forall n>N \colon 
         \splitem |a_n b_n - AB| < \eps.
 
-    Преобразуем левую часть последнего неравенства в \ref{eq:05:prod-need}. Для
-    этого воспользуемся картинкой (см.  \ref[рис.][fig:05:squares]).
+    Transform the left-hand side of the last inequality in \ref{eq:05:prod-need}. Let us
+    use an image for that (see \ref[fig.][fig:05:squares]).
 
-    Геометрический смысл произведения — площадь прямоугольника с заданными
-    сторонами. Построим прямоугольник со сторонами $a_n$ и $b_n$. Давайте для
-    определенности считать, что $A<a_n$ и $B<b_n$ (это предположение полезно
-    для иллюстрации, но нас оно не будет ограничивать: простое алгебраическое
-    доказательство нужной нам формулы его не требует). Тогда прямоугольник со
-    сторонами $A$ и $B$ будет меньше первого прямоугольника и его можно
-    разместить внутри, прижав к левому нижнему углу.  
+    Geometrical meaning of a product is the area of a rectangle with given
+    sides. Construct a rectangle with sides $a_n$ and $b_n$. Let us consider that
+    $A<a_n$ and $B<b_n$ for certainty. This assumption is useful for 
+    illustrative purposes, but it will not limit us: simple algebraic
+    proof of our formula does not require it. Then a rectangle with
+    sides $A$ and $B$ will be smaller than the first rectangle and can
+    be placed inside, fitted into the bottom left corner.  
 
     \figure
         \img
@@ -497,49 +483,47 @@ $(M+1)^2\eps$ — ничего страшного, это всё равно по
             \style
                 padding: 1em; max-width:400px;
             \alt
-                Иллюстрация к формуле про разность двух площадей, см. описание
-                выше в тексте.
+                Illustration for two areas, see decription above.
         \caption
-            Иллюстрация к формуле \ref{eq:05:squares}.
+            Illustration for \ref{eq:05:squares}.
         \label fig:05:squares
 
-
-    Выражение $(a_n b_n - AB)$ — разность площадей двух прямоугольников, которая
-    выглядит как уголок. Можно разбить этот уголок на два прямоугольника, один
-    со сторонами $(a_n-A)$ и $B$, а другой со сторонами $a_n$ и $(b_n-B)$. Имеем:
+    The expression $(a_n b_n - AB)$ is the difference in areas of two rectangles that
+    looks like a corner. We can split this corner into two rectangles, one
+    with sides $(a_n-A)$ and $B$, and the other with sides $a_n$ and $(b_n-B)$. We got:
     \gather 
         \item \label eq:05:squares
             |a_n b_n - AB| = 
         \splitem \splonly{=} |(a_n - A) B + a_n (b_n - B)|.
-    Раскрыв скобки и приведя подобные слагаемые, легко проверить, что это
-    алгебраическое тождество. (Как правило переход слева направо в этом
-    тождестве делается с помощью приёма «добавим и вычтем $a_nB$», что выглядит
-    как фокус — нарисовав картинку мы раскрыли секрет этого фокуса.)
+    Opening the brackets and simplifying, it is easy to check that we got
+    ourselves an algebraic identity. (As a rule, the transition from left to right
+    in this identity is done using the trick called "add and subtract $a_nB$", which looks
+    like a magic trick––having drawn a picture, we solved the mystery.)
 
-    Воспользуемся теперь свойствами модулей: модуль суммы не превосходит суммы
-    модулей, модуль произведения равен произведению модулей. Получаем такую
-    оценку:
+    Let us now use properties of moduli: the modulus of a sum is not bigger
+    than the sum of moduli, the modulus of a product equals the product of moduli. We get a following
+    evaluation:
     \gather 
         \item \label eq:05:summod
             |(a_n - A) B + a_n (b_n - B)| \le 
         \splitem \splonly{\le} |a_n-A|\cdot |B| +
         \splitem \splonly{+}  |a_n|\cdot |b_n - B|
-    Заметим, что сомножители $|a_n-A|$ и $|b_n-B|$ мы умеем делать маленькими
-    благодаря известным нам пределам. А именно, положим $\eps_1=\eps_2=\eps$ и
-    пусть $N=\max(N_1(\eps), N_2(\eps))$. Тогда для всех $n>N$:
+    Note that multiples $|a_n-A|$ and $|b_n-B|$ can be made small
+    thanks to the limits that we have learned about. Consider $\eps_1=\eps_2=\eps$ and
+    let $N=\max(N_1(\eps), N_2(\eps))$. Then for all $n>N$:
     \eq
         |a_n - A| < \eps,\quad |b_n - B| < \eps.
 
-    Разберемся теперь с остальными сомножителями (см.
-    \ref[рис.][fig:05:estimates]).
+    Now let us figure out other multipliers (see
+    \ref[fig.][fig:05:estimates]).
 
-    Во-первых, $|B|$. С ним ничего делать не надо: это просто число, которое не
-    зависит от $n$.
+    First of all, $|B|$. We do not need to do anything about it: it is just a number that
+    does not depend on $n$.
 
-    Далее, $|a_n|$. С этой штукой не так просто: она от $n$ зависит. Однако, мы
-    \ref[помним\nonumber][thm:05:bound], что последовательность, имеющая предел,
-    ограничена. А последовательность $\seq{a_n}$ имеет предел по условию.
-    Значит, найдётся такое $C_1$, что для всех $n$, $|a_n| < C_1$.
+    Next, $|a_n|$. This one is not that simple––it does depend on $n$. Though we
+    \ref[remember\nonumber][thm:05:bound] that a sequence that has a limit
+    is bounded. And sequence $\seq{a_n}$ has limit by the condition that we are given.
+    Then, there is such $C_1$ that for all $n$, $|a_n| < C_1$.
 
     \figure
         \img
@@ -547,36 +531,36 @@ $(M+1)^2\eps$ — ничего страшного, это всё равно по
             \style
                 padding: 1em; max-width:700px;
             \alt
-                Иллюстрация к оценке, приведенной ниже.
+                Illustration for the evaluation below.
         \caption
-            Иллюстрация к формуле \ref{eq:05:estimate}.
+            Illustration for the formula \ref{eq:05:estimate}.
         \label fig:05:estimates
 
-    Все сомножители неотрицательны, и значит можно оценить каждый из
-    сомножителей, оценить их произведение, а потом оценить сумму. Имеем:
+    All multiplies are nonnegative, and so we can evaluate each
+    multiplier, their product, and then their sum. We got:
 
     \gather 
         \item \label eq:05:estimate 
             |a_n-A|\cdot |B| + 
         \splitem \splonly{+} |a_n|\cdot |b_n - B| < 
         \splitem \splonly{<} |B| \eps + C_1 \eps = (|B|+C_1) \eps.
-    Соединяя \ref{eq:05:squares}, \ref{eq:05:summod} и \ref{eq:05:estimate} в
-    одну длинную цепочку неравенств, получаем неавенство, верное для всех $n>N$:
+    Connecting \ref{eq:05:squares}, \ref{eq:05:summod} and \ref{eq:05:estimate} into one
+    long chain of inequalities, we get a true inequality for all $n>N$:
     \eq
         |a_n b_n - AB | < (|B|+C_1) \eps.
 
-    Положим теперь $C=|B|+C_1$ и по \ref[лемме][lem:05:simplify]
-    искомое утверждение доказано.
+    Consider now $C=|B|+C_1$ and per \ref[lemma][lem:05:simplify],
+    the statement is proven.
 
-\section Заключение
+\section Conclusion
 
-Мы продолжаем строить теорию пределов и в этой лекции определили новое понятие —
-бесконечные пределы, причём аж трёх видов (к счастью, очень похожих друг на
-друга). Мы также доказали ряд важных общих свойств конечных пределов. Во-первых,
-сходящаяся (к конечному числу) последовательность ограничена.  Во-вторых, предел
-суммы равен сумме пределов, а предел произведения — произведению пределов (но
-только если все эти пределы существуют, то есть, опять же, конечны). Наконец, мы
-доказали очень полезную лемму, которой будем пользоваться в дальнейшем. В
-следующей лекции мы разберемся с пределом частного — с ним будет всё похитрее.
-Не переключайтесь!
+We continue constructing the theory of limits. In this lecture, we defined a new idea—–
+infinite limits, and already three types of those (luckily, all of them are very
+similar). We have also proven a number of important general properties of finite limits.
+Firsty, a sequence converging to a number is limited. Secondly, the limit
+of a sum equals the sum of limits, and the limit of a product equals the product of limits
+(though only if all these limits exists, i.e. are finite). Finally, we
+proved a very useful lemma that we will use in the future. In the next lecture, we will
+be figuring out the limit of a difference, and that will be trickier.
+Stay tuned!
 
